@@ -6,7 +6,8 @@ import db from "./config/Database.js";
 import SequelizeStore from "connect-session-sequelize";
 import UserRoute from "./routes/AuthUser.js";
 import AuthRoute from "./routes/AuthRoute.js";
-import { verifyUser, adminOnly } from "../middleware/AuthUser.js";
+import BookRoute from "./routes/BookRoute.js";
+import { verifyUser, adminOnly } from "./middleware/AuthUser.js";
 dotenv.config();
 
 const app = express();
@@ -17,9 +18,9 @@ const store = new sessionStore({
   db: db,
 });
 
-// (async () => {
-//   await db.sync();
-// })();
+(async () => {
+  await db.sync();
+})();
 
 // simpan secret di dotnev in the future
 app.use(
@@ -41,6 +42,7 @@ app.use(
   })
 );
 app.use(express.json());
+app.use("/books", BookRoute);
 //proteksi route middleware sebenernya bisa saja di tulis di UserRoute pada masing masing endpoint, saya buat disini biar nggak nulis banyak, oh iya disini jg ada prefix
 app.use("/users", verifyUser, adminOnly, UserRoute);
 app.use(AuthRoute);
