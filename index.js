@@ -42,6 +42,7 @@ app.use(
   })
 );
 app.use(express.json());
+app.use("/uploads", express.static("./uploads"));
 app.use("/books", BookRoute);
 //proteksi route middleware sebenernya bisa saja di tulis di UserRoute pada masing masing endpoint, saya buat disini biar nggak nulis banyak, oh iya disini jg ada prefix
 app.use("/users", verifyUser, adminOnly, UserRoute);
