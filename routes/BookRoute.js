@@ -1,5 +1,6 @@
 import express from 'express';
 import { CreateBook, getAllBooks, deleteBook, getBookById, updateBook } from '../controllers/Book.js';
+import { getPagesByBookId } from "../controllers/Page.js";
 import upload from "../middleware/Upload.js";
 
 const router = express.Router();
@@ -18,5 +19,8 @@ router.patch('/:id', upload.fields([{ name: "file", maxCount: 1 }, { name: "file
 
 // // DELETE /books/:id
 router.delete('/:id', deleteBook);
+
+// Get Pages by BookId
+router.get('/:bookId/pages', getPagesByBookId);
 
 export default router;

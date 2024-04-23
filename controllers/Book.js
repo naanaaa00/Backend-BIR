@@ -1,4 +1,4 @@
-import Books from "../models/BookModel.js";
+import { Books, Pages } from "../models/Associations.js";
 import UserModel from "../models/UserModel.js";
 import { v4 as uuidv4 } from "uuid";
 import fs from "fs";
@@ -84,6 +84,14 @@ export const deleteBook = async (req, res) => {
     const id = req.params.id;
     try {
         const book = await Books.destroy({ where: { bookid: id } });
+        // Delete old files
+        if (book.music) {
+            fs.unlinkSync(path.join('./uploads/', oldBook.music));
+        }
+        if (book.image) {
+            fs.unlinkSync(path.join('./uploads/', oldBook.image));
+        }
+
         res.status(200).json({ msg: "Book deleted" });
     } catch (error) {
         res.status(400).json({ msg: error.message });

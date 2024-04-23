@@ -7,6 +7,7 @@ import SequelizeStore from "connect-session-sequelize";
 import UserRoute from "./routes/AuthUser.js";
 import AuthRoute from "./routes/AuthRoute.js";
 import BookRoute from "./routes/BookRoute.js";
+import PageRoute from "./routes/PageRoute.js";
 import { verifyUser, adminOnly } from "./middleware/AuthUser.js";
 dotenv.config();
 
@@ -44,6 +45,7 @@ app.use(
 app.use(express.json());
 app.use("/uploads", express.static("./uploads"));
 app.use("/books", BookRoute);
+app.use("/pages", PageRoute);
 //proteksi route middleware sebenernya bisa saja di tulis di UserRoute pada masing masing endpoint, saya buat disini biar nggak nulis banyak, oh iya disini jg ada prefix
 app.use("/users", verifyUser, adminOnly, UserRoute);
 app.use(AuthRoute);
