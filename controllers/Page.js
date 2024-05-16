@@ -83,6 +83,9 @@ export const getPagesByBookId = async (req, res) => {
                     model: Books,
                     as: 'relatedBook'
                 }
+            ],
+            order: [
+                ['pageid', 'ASC']
             ]
         });
 
