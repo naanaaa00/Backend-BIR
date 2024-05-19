@@ -18,7 +18,7 @@ const Pages = db.define(
             },
         },
         storytext: {
-            type: DataTypes.STRING,
+            type: DataTypes.TEXT,
             allowNull: false,
             validate: {
                 notEmpty: true,
