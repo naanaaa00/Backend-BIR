@@ -22,7 +22,7 @@ const Pages = db.define(
             allowNull: false,
             validate: {
                 notEmpty: true,
-                len: [3, 500],
+                // len: [3, 500],
             },
         },
         image: {
